@@ -1,4 +1,4 @@
-package com.aleksandrbogomolov.producer
+package com.aleksandrbogomolov.configuration
 
 import java.io.File
 
@@ -8,7 +8,7 @@ import org.apache.camel.ProducerTemplate
 import org.apache.camel.component.jms.JmsComponent
 import org.apache.camel.impl.DefaultCamelContext
 
-class Producer {
+class ProducerConfiguration {
 
   val config = ConfigFactory.parseFile(new File("config/application.conf")).resolve
 
