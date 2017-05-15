@@ -19,6 +19,7 @@ class ProducerConfiguration {
   ctx.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory))
 
   def getTemplate: ProducerTemplate = {
+    ctx.start()
     ctx.createProducerTemplate
   }
 }

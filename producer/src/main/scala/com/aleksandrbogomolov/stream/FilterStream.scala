@@ -1,16 +1,17 @@
 package com.aleksandrbogomolov.stream
 
 import com.aleksandrbogomolov.configuration.SparkConfiguration
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.twitter.TwitterUtils
 
 class FilterStream(filters: Array[String]) {
 
-  val configuration = new SparkConfiguration
+  val sparkConf = new SparkConfiguration
 
-  def start() = {
-    val statuses = TwitterUtils.createStream(configuration.streamingContext, configuration.auth, filters)
-    statuses.foreachRDD(_.foreachPartition(_.foreach(println)))
-    configuration.streamingContext.start()
-    configuration.streamingContext.awaitTermination()
+  def start(): DStream[String] = {
+    val statuses = TwitterUtils.createStream(sparkConf.streamingContext, sparkConf.auth, filters)
+    val mapper = new ObjectMapper()
+    statuses.map(mapper.writeValueAsString(_))
   }
 }

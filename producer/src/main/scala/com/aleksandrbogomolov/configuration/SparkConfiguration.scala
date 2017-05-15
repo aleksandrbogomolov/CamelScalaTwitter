@@ -12,7 +12,7 @@ class SparkConfiguration {
 
   val sparkContext = new SparkContext(new SparkConf().setAppName("stream_app").setMaster("local[*]"))
 
-  val streamingContext = new StreamingContext(sparkContext, Duration(10000))
+  val streamingContext = new StreamingContext(sparkContext, Duration(5000))
 
   Logger.getRootLogger.setLevel(Level.ERROR)
 }
