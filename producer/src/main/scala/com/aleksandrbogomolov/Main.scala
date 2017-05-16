@@ -5,7 +5,7 @@ import com.aleksandrbogomolov.stream.FilterStream
 
 object Main extends App {
 
-  val filters = Array("#java", "#scala", "#kotlin", "#groovy", "#haskell")
+  val filters = Array("#java", "#scala", "#haskell", "#groovy")
 
   private val filterStream = new FilterStream(filters)
 
