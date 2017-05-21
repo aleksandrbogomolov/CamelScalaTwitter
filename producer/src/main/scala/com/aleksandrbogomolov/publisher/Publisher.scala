@@ -1,14 +1,30 @@
 package com.aleksandrbogomolov.publisher
 
-import com.aleksandrbogomolov.configuration.ProducerConfiguration
+import javax.jms.ConnectionFactory
+
+import com.aleksandrbogomolov.helper.PropertyHelper
+import org.apache.activemq.pool.PooledConnectionFactory
+import org.apache.camel.component.jms.JmsComponent
+import org.apache.camel.impl.DefaultCamelContext
 
 object Publisher {
 
-  private val producer = new ProducerConfiguration()
+  val ctx = new DefaultCamelContext
 
-  val sender = producer.ctx.createProducerTemplate
+  ctx.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(getPoolFactory))
 
-  producer.ctx.start()
+  ctx.start()
 
-  val publish = (twit: String) => sender.sendBody(producer.config.getString("producer.queue"), twit)
+  val producer = ctx.createProducerTemplate
+
+  val publish = (twit: String) => {
+    producer.sendBody(PropertyHelper.getProperty("producer.queue"), twit)
+  }
+
+  def getPoolFactory: ConnectionFactory = {
+    val pool = new PooledConnectionFactory(PropertyHelper.getProperty("broker.vm"))
+    pool.setMaxConnections(10)
+    pool.setMaximumActiveSessionPerConnection(10)
+    pool
+  }
 }
