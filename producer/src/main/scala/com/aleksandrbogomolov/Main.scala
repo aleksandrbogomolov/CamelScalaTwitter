@@ -10,7 +10,7 @@ object Main extends App {
 
   BrokerConfiguration.broker.start()
 
-  private val filterStream = new FilterStream(filters)
+  val filterStream = new FilterStream(filters)
 
   val stream = filterStream.start()
 
