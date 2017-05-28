@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Twitter FEED</title>
+    <script src="target/scala-2.11/web-jsdeps.js" defer></script>
     <script src="target/scala-2.11/web-fastopt.js" defer></script>
     <link rel="stylesheet" href="src/main/resources/css/style.css">
 </head>
 <body>
 <form id="filterForm">
-    <input type="text" id="search">
+    <label for="search"></label>
+    <input type="text" id="search" placeholder="Enter some keywords.">
+    <button id="clickMeButton" type="button">Start</button>
 </form>
 </body>
 </html>
