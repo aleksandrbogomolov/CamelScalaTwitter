@@ -1,18 +1,13 @@
-enablePlugins(ScalaJSPlugin)
-
 name := "web"
 
 version := "1.0"
 
 scalaVersion := "2.11.11"
 
-scalaJSUseMainModuleInitializer := true
-
 libraryDependencies ++= Seq(
-  "be.doeraene" % "scalajs-jquery_sjs0.6_2.11" % "0.9.1"
-)
-
-skip in packageJSDependencies := false
-jsDependencies ++= Seq(
-  "org.webjars" % "jquery" % "2.1.4" / "2.1.4/jquery.js"
+  "org.apache.activemq" % "activemq-all" % "5.14.5",
+  "org.apache.camel" % "camel-scala" % "2.19.0",
+  "org.apache.commons" % "commons-pool2" % "2.4.2",
+  "org.scala-lang.modules" % "scala-xml_2.11" % "1.0.6",
+  "com.typesafe" % "config" % "1.3.1"
 )
